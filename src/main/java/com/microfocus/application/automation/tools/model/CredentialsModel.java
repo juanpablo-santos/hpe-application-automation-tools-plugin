@@ -44,10 +44,10 @@ import java.io.Serializable;
 
 public class CredentialsModel extends AbstractDescribableImpl<CredentialsModel> implements Serializable {
     private String almUsername;
-    private String almPassword;
+    private Secret almPassword;
 
     @DataBoundConstructor
-    public CredentialsModel(String almUsername, String almPassword) {
+    public CredentialsModel(String almUsername, Secret almPassword) {
         this.almUsername = almUsername;
         this.almPassword = almPassword;
     }
@@ -57,10 +57,10 @@ public class CredentialsModel extends AbstractDescribableImpl<CredentialsModel> 
     }
 
     public Secret getAlmPassword(){
-        return Secret.fromString(almPassword);
+        return almPassword;
     }
     public String getAlmPasswordPlainText(){
-        return almPassword;
+        return almPassword.getPlainText();
     }
     @Extension
     public static class DescriptorImpl extends Descriptor<CredentialsModel> {
